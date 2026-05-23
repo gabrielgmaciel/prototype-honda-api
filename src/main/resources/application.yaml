@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: prototype-honda-api
+
+  mongodb:
+    uri: mongodb://admin:senha123@localhost:27017/honda?authSource=admin
+    auto-index-creation: true
+
+jwt:
+  secret: 019e5565-6682-78e1-949d-dd6333836e77
+  expiration: 86400000
