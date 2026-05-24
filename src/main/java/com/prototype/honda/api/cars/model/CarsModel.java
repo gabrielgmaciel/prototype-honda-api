@@ -16,8 +16,10 @@ public class CarsModel {
     private String name;
     private String description;
     private BigDecimal price;
+    private String cover;
     private String banner;
     private String category;
     private Collection<String> images;
+    private Collection<Itens> itens;
 
 }

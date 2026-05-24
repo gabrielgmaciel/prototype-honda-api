@@ -19,16 +19,27 @@ public class SecurityConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http
-    ) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(AbstractHttpConfigurer::disable)
+        http
+                // 🔥 IMPORTANTE: habilita CORS no Spring Security
+                .cors(cors -> {
+                })
+
+                .csrf(AbstractHttpConfigurer::disable)
+
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ).exceptionHandling(exception -> exception
+                )
+
+                .exceptionHandling(exception -> exception
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                ).authorizeHttpRequests(auth -> auth
+                )
+
+                .authorizeHttpRequests(auth -> auth
+
+                        // 🔥 LIBERA PRE-FLIGHT CORS (ESSENCIAL)
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
                         // Swagger / OpenAPI
                         .requestMatchers(
@@ -38,25 +49,20 @@ public class SecurityConfig {
                         ).permitAll()
 
                         // Auth pública
-                        .requestMatchers(
-                                "/api/auth/**"
-                        ).permitAll()
+                        .requestMatchers("/api/auth/**").permitAll()
 
-                        // Endpoints públicos
-                        .requestMatchers(
-                                "/public/**",
-                                "/api/users/register"
-                        ).permitAll()
+                        // Públicos
+                        .requestMatchers("/public/**",
+                                "/api/users/register").permitAll()
 
-                        // Exemplo GET público
-                        .requestMatchers(
-                                HttpMethod.GET,
-                                "/cars/**"
-                        ).permitAll()
+                        // GET público exemplo
+                        .requestMatchers(HttpMethod.GET, "/api/cars", "/api/cars/all").permitAll()
 
-                        // Qualquer outra rota precisa JWT
+                        // Protegido
                         .anyRequest().authenticated()
-                ).addFilterBefore(
+                )
+
+                .addFilterBefore(
                         jwtAuthenticationFilter,
                         UsernamePasswordAuthenticationFilter.class
                 );
