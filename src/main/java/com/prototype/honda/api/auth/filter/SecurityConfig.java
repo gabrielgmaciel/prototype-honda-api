@@ -56,7 +56,11 @@ public class SecurityConfig {
                                 "/api/users/register").permitAll()
 
                         // GET público exemplo
-                        .requestMatchers(HttpMethod.GET, "/api/cars", "/api/cars/all").permitAll()
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/cars",
+                                "/api/cars/all",
+                                "/api/addresses")
+                        .permitAll()
 
                         // Protegido
                         .anyRequest().authenticated()

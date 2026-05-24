@@ -7,9 +7,11 @@ import com.prototype.honda.api.exception.exceptions.NotAuthorizedException;
 import com.prototype.honda.api.exception.exceptions.NotFoundException;
 import com.prototype.honda.api.user.model.User;
 import com.prototype.honda.api.user.repository.UserRepository;
+import com.prototype.honda.api.utils.Utils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collections;
 
@@ -28,7 +30,22 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRoles(Collections.singleton("user"));
-        return userRepository.save(user);
+        return convertUser(userRepository.save(user));
+    }
+
+    public User uploadProfileImage(String userId, MultipartFile file) {
+        var user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+
+        user.setImageProfile(Utils.saveFile(file));
+        return convertUser(userRepository.save(user));
+    }
+
+    private User convertUser(User user) {
+        if (user.getImageProfile() != null) {
+            user.setImageProfile(Utils.getFile(user.getImageProfile()));
+        }
+        return user;
     }
 
     public String login(Login login) {
@@ -46,7 +63,7 @@ public class UserService {
     }
 
     public User getUserById(String userCode) {
-        return userRepository.findById(userCode)
-                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        return convertUser(userRepository.findById(userCode)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado")));
     }
 }
