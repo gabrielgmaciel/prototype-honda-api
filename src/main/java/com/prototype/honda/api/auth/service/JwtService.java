@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class JwtService {
@@ -19,11 +21,12 @@ public class JwtService {
     private Long expiration;
 
 
-    public String generateToken(String userId, String email) {
+    public String generateToken(String userId, String email, Collection<String> roles) {
 
         return JWT.create()
                 .withSubject(userId)
                 .withClaim("email", email)
+                .withClaim("roles", roles.stream().toList())
                 .withIssuedAt(new Date())
                 .withExpiresAt(
                         new Date(System.currentTimeMillis() + expiration)

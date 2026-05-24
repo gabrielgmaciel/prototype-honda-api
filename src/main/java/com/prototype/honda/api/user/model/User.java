@@ -10,6 +10,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Collection;
+
 @Document(collection = "users")
 @Getter
 @Setter
@@ -24,6 +26,7 @@ public class User {
             regexp = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$",
             message = "Email inválido"
     )
+    private String imageProfile;
     @NotBlank
     private String email;
     @NotBlank
@@ -35,4 +38,5 @@ public class User {
     private String phone;
     @NotBlank
     private Address address;
+    private Collection<String> roles;
 }
