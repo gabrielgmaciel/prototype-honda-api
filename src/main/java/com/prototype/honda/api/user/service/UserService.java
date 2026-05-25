@@ -5,10 +5,13 @@ import com.prototype.honda.api.auth.service.JwtService;
 import com.prototype.honda.api.exception.exceptions.BusinessException;
 import com.prototype.honda.api.exception.exceptions.NotAuthorizedException;
 import com.prototype.honda.api.exception.exceptions.NotFoundException;
+import com.prototype.honda.api.user.dto.UserResponse;
 import com.prototype.honda.api.user.model.User;
 import com.prototype.honda.api.user.repository.UserRepository;
 import com.prototype.honda.api.utils.Utils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +25,16 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
+
+    public UserResponse getUsers(int page, int size) {
+        return convertUserResponse(userRepository
+                .findAll(Pageable.ofSize(size).withPage(page)));
+    }
+
+    public UserResponse searchUsers(String email, String name, int page, int size) {
+        return convertUserResponse(userRepository
+                .findByEmailOrName(email, name, Pageable.ofSize(size).withPage(page)));
+    }
 
     public User createUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
@@ -72,6 +85,14 @@ public class UserService {
             user.setImageProfile(Utils.getFile(user.getImageProfile()));
         }
         return user;
+    }
+
+    private UserResponse convertUserResponse(Page<User> users) {
+        return new UserResponse(
+                users.getContent().stream().map(this::convertUser).toList(),
+                users.getNumberOfElements(),
+                users.getTotalPages()
+        );
     }
 
     public String login(Login login) {

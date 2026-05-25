@@ -1,6 +1,7 @@
 package com.prototype.honda.api.user.controller;
 
 import com.prototype.honda.api.auth.dto.UserPrincipal;
+import com.prototype.honda.api.user.dto.UserResponse;
 import com.prototype.honda.api.user.model.User;
 import com.prototype.honda.api.user.service.UserService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -48,5 +49,22 @@ public class UserController {
     ) {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.getUserById(userPrincipal.getUsername()));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<UserResponse> getAllUsers(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) {
+        return ResponseEntity.ok(userService.getUsers(page, size));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<UserResponse> searchUsers(
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String name,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        return ResponseEntity.ok(userService.searchUsers(email, name, page, size));
     }
 }
