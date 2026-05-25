@@ -1,7 +1,6 @@
 package com.prototype.honda.api.cars.service;
 
 import com.prototype.honda.api.cars.dto.CarsResponse;
-import com.prototype.honda.api.cars.model.CarsAvaliables;
 import com.prototype.honda.api.cars.model.CarsModel;
 import com.prototype.honda.api.cars.repository.CarsRepository;
 import com.prototype.honda.api.converter.CarsConverter;
@@ -71,7 +70,7 @@ public class CarsService {
                 .orElseThrow(() -> new NotFoundException("Veículo não encontrado"));
     }
 
-    public Collection<SimpleCarsResponse>  findAll() {
+    public Collection<SimpleCarsResponse> findAll() {
         return carsRepository.findAll().stream()
                 .map(carsConverter::convertSimple)
                 .toList();

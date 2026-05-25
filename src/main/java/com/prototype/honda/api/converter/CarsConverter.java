@@ -30,7 +30,7 @@ public class CarsConverter {
     }
 
     private Collection<String> getImages(Collection<String> images) {
-        if(null == images || images.isEmpty()) {
+        if (null == images || images.isEmpty()) {
             return Collections.emptyList();
         }
         return images.stream()

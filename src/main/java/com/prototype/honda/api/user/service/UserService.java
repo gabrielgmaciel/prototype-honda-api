@@ -33,11 +33,37 @@ public class UserService {
         return convertUser(userRepository.save(user));
     }
 
+    public User updateUser(User user, String userCode) {
+        var data = userRepository.findById(userCode)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+
+        data.setImageProfile(data.getImageProfile());
+        data.setEmail(data.getEmail());
+        data.setRoles(data.getRoles());
+
+        data.setName(user.getName());
+        data.setPhone(user.getPhone());
+        data.setAddress(user.getAddress());
+
+        if (verifyPassword(data.getPassword(), passwordEncoder.encode(user.getPassword()))) {
+            data.setPassword(passwordEncoder.encode(user.getPassword()));
+        } else {
+            data.setPassword(data.getPassword());
+        }
+
+        return convertUser(userRepository.save(data));
+    }
+
     public User uploadProfileImage(String userId, MultipartFile file) {
         var user = userRepository.findById(userId)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
 
-        user.setImageProfile(Utils.saveFile(file));
+        if (file == null || file.isEmpty()) {
+            user.setImageProfile(null);
+        } else {
+            user.setImageProfile(Utils.saveFile(file));
+        }
+
         return convertUser(userRepository.save(user));
     }
 
@@ -65,5 +91,11 @@ public class UserService {
     public User getUserById(String userCode) {
         return convertUser(userRepository.findById(userCode)
                 .orElseThrow(() -> new NotFoundException("Usuário não encontrado")));
+    }
+
+    private Boolean verifyPassword(String oldPassword, String password) {
+        if (null == password) {
+            return false;
+        } else return !password.equals(oldPassword);
     }
 }

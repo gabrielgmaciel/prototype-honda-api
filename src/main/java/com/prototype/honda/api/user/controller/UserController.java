@@ -27,9 +27,16 @@ public class UserController {
                 .body(userService.createUser(user));
     }
 
-    @PostMapping(value = "/upload/image/profile", consumes = "multipart/form-data")
+    @PutMapping("/update")
+    public ResponseEntity<User> updateUser(
+            @RequestBody User user,
+            @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        return ResponseEntity.ok(userService.updateUser(user, userPrincipal.getUser().getId()));
+    }
+
+    @PutMapping(value = "/upload/image/profile", consumes = "multipart/form-data")
     public ResponseEntity<User> uploadProfileImage(
-            @RequestParam("image") MultipartFile image,
+            @RequestParam(name = "image", required = false) MultipartFile image,
             @AuthenticationPrincipal UserPrincipal user
     ) {
         return ResponseEntity.ok(userService.uploadProfileImage(user.getUser().getId(), image));

@@ -12,7 +12,7 @@ public class AddressClient {
     private final RestTemplate restAddress;
 
     public AddressResponse getAddressByZipCode(String zipCode) {
-        try{
+        try {
             return restAddress.getForObject("/{zipCode}", AddressResponse.class, zipCode);
         } catch (Exception e) {
             throw new RuntimeException("Não foi possível obter o endereço", e);
