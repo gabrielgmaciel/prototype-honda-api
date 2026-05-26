@@ -119,4 +119,17 @@ public class UserService {
             return false;
         } else return !password.equals(oldPassword);
     }
+
+    public User updateUserAccess(String userCode, String newAccess) {
+        var user = userRepository.findById(userCode)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        user.setRoles(Collections.singleton(newAccess));
+        return convertUser(userRepository.save(user));
+    }
+
+    public void deleteUser(String userId) {
+        var user = userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
+        userRepository.delete(user);
+    }
 }

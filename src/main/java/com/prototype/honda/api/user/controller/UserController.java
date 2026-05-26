@@ -67,4 +67,20 @@ public class UserController {
             @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity.ok(userService.searchUsers(email, name, page, size));
     }
+
+    @PutMapping("/update/access")
+    public ResponseEntity<User> updateUserAccess(
+            @RequestParam String userCode,
+            @RequestParam String newAccess) {
+        return ResponseEntity.ok(userService.updateUserAccess(userCode, newAccess));
+    }
+
+    @DeleteMapping("/close/account")
+    public ResponseEntity<Void> closeAccount(
+            @RequestParam(required = false) String userCode,
+            @AuthenticationPrincipal UserPrincipal userPrincipal) {
+        userService.deleteUser(null == userCode ? userPrincipal.getUser().getId() : userCode);
+        return ResponseEntity.noContent().build();
+    }
+
 }
