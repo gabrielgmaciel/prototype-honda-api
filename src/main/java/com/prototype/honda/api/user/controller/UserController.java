@@ -77,9 +77,8 @@ public class UserController {
 
     @DeleteMapping("/close/account")
     public ResponseEntity<Void> closeAccount(
-            @RequestParam(required = false) String userCode,
-            @AuthenticationPrincipal UserPrincipal userPrincipal) {
-        userService.deleteUser(null == userCode ? userPrincipal.getUser().getId() : userCode);
+            @RequestParam(required = false) String userCode) {
+        userService.deleteUser(userCode);
         return ResponseEntity.noContent().build();
     }
 

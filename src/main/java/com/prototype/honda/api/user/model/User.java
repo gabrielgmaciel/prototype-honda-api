@@ -18,7 +18,6 @@ import java.util.Collection;
 public class User {
 
     @Id
-    @JsonIgnore
     private String id;
 
     @Indexed(unique = true)
