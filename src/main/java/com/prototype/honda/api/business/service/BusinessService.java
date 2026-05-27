@@ -8,9 +8,12 @@ import com.prototype.honda.api.business.repository.ProposalRepository;
 import com.prototype.honda.api.cars.service.CarsService;
 import com.prototype.honda.api.user.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.Collection;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
@@ -22,19 +25,64 @@ public class BusinessService {
     private final UserService userService;
     private final GenerateCodeService generateCodeService;
     private final BusinessClient businessClient;
+    private final TaskExecutor taskExecutor;
 
-    public Collection<ProposalModel> generateProposal(String userCode, String carId) {
-        return getProposals(userCode, carId).stream()
-                .map(businessClient::generateProposal)
-                .map(proposalRepository::save)
-                .toList();
+    public SseEmitter generateProposal(String userCode, String carId) {
+
+        SseEmitter emitter = new SseEmitter(300000L);
+
+        CompletableFuture.runAsync(() -> {
+            try {
+                var proposals = getProposals(userCode, carId);
+                var futures = proposals.stream()
+                        .map(proposal ->
+                                CompletableFuture.supplyAsync(() -> {
+                                    ProposalModel generated = businessClient.generateProposal(proposal);
+                                    ProposalModel saved = proposalRepository.save(generated);
+
+                                    try {
+                                        synchronized (emitter) {
+                                            emitter.send(SseEmitter.event()
+                                                    .name("proposal")
+                                                    .data(saved)
+                                            );
+                                        }
+                                    } catch (Exception e) {
+                                        throw new RuntimeException(e);
+                                    }
+
+                                    return saved;
+
+                                }, taskExecutor)
+                        )
+                        .toList();
+
+                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+
+                synchronized (emitter) {
+                    emitter.send(SseEmitter.event()
+                            .name("finished")
+                            .data("Processamento finalizado")
+                    );
+                }
+
+                emitter.complete();
+
+            } catch (Exception e) {
+                emitter.completeWithError(e);
+            }
+
+        }, taskExecutor);
+
+        return emitter;
     }
 
     private Collection<ProposalModel> getProposals(String userCode, String carId) {
         var proposalCode = generateCodeService.generateProposalCode();
         var car = carsService.findById(carId);
         var user = userService.getUserById(userCode);
-        return dealershipRepository.findAllByStatusActive().stream()
+        return dealershipRepository.findAllByStatusActive()
+                .stream()
                 .map(partner -> ProposalModel.builder()
                         .proposalCode(proposalCode)
                         .customerCode(user.getId())
@@ -44,7 +92,6 @@ public class BusinessService {
                         .vehiclePrice(car.price())
                         .dealership(partner)
                         .build())
-                .map(proposalRepository::save)
                 .toList();
     }
 }

@@ -1,6 +1,8 @@
 package com.prototype.honda.api.auth.filter;
 
 import com.prototype.honda.api.auth.service.JwtAuthenticationEntryPoint;
+import jakarta.servlet.DispatcherType;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,56 +22,44 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        http
-                // 🔥 IMPORTANTE: habilita CORS no Spring Security
-                .cors(cors -> {
+        http.cors(cors -> {
                 })
-
                 .csrf(AbstractHttpConfigurer::disable)
-
                 .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-
-                .exceptionHandling(exception -> exception
-                        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                )
-
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint((req, res, e) -> {
+                            if (!res.isCommitted()) {
+                                res.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+                            }
+                        })
+                        .accessDeniedHandler((req, res, e) -> {
+                            if (!res.isCommitted()) {
+                                res.sendError(HttpServletResponse.SC_FORBIDDEN);
+                            }
+                        }))
                 .authorizeHttpRequests(auth -> auth
-
-                        // 🔥 LIBERA PRE-FLIGHT CORS (ESSENCIAL)
+                        // Públicos
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                        // Swagger / OpenAPI
                         .requestMatchers(
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
-                                "/v3/api-docs/**"
-                        ).permitAll()
-
-                        // Auth pública
+                                "/v3/api-docs/**").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
-
-                        // Públicos
                         .requestMatchers("/public/**",
                                 "/api/users/register").permitAll()
-
-                        // GET público exemplo
                         .requestMatchers(HttpMethod.GET,
                                 "/api/cars",
                                 "/api/cars/all",
-                                "/api/addresses")
-                        .permitAll()
+                                "/api/addresses").permitAll()
+                        .dispatcherTypeMatchers(
+                                DispatcherType.ASYNC,
+                                DispatcherType.ERROR).permitAll()
 
                         // Protegido
                         .anyRequest().authenticated()
                 )
-
-                .addFilterBefore(
-                        jwtAuthenticationFilter,
-                        UsernamePasswordAuthenticationFilter.class
-                );
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
