@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Honda Prime Brasília",
+    "partnerCode": "2300",
+    "status": "ativo",
+    "email": "contato@hondaprime.com.br",
+    "document": "12.345.678/0001-10",
+    "address": "Avenida Central, 1200",
+    "phone": "(61) 3333-1001",
+    "zipCode": "70610-000",
+    "city": "Brasília",
+    "state": "DF"
+  },
+  {
+    "name": "AutoMax Motors",
+    "partnerCode": "2301",
+    "status": "ativo",
+    "email": "vendas@automax.com.br",
+    "document": "23.456.789/0001-21",
+    "address": "Rua das Palmeiras, 450",
+    "phone": "(11) 4002-8922",
+    "zipCode": "04567-120",
+    "city": "São Paulo",
+    "state": "SP"
+  },
+  {
+    "name": "Elite Veículos",
+    "partnerCode": "2302",
+    "status": "ativo",
+    "email": "atendimento@eliteveiculos.com.br",
+    "document": "34.567.890/0001-32",
+    "address": "Avenida Atlântica, 980",
+    "phone": "(21) 3222-7788",
+    "zipCode": "22070-001",
+    "city": "Rio de Janeiro",
+    "state": "RJ"
+  },
+  {
+    "name": "SulCar Concessionária",
+    "partnerCode": "2303",
+    "status": "ativo",
+    "email": "contato@sulcar.com.br",
+    "document": "45.678.901/0001-43",
+    "address": "Rua Bento Gonçalves, 210",
+    "phone": "(51) 3555-2233",
+    "zipCode": "90020-090",
+    "city": "Porto Alegre",
+    "state": "RS"
+  },
+  {
+    "name": "Minas Auto Center",
+    "partnerCode": "2304",
+    "status": "ativo",
+    "email": "vendas@minasauto.com.br",
+    "document": "56.789.012/0001-54",
+    "address": "Avenida Afonso Pena, 1500",
+    "phone": "(31) 3444-5566",
+    "zipCode": "30130-003",
+    "city": "Belo Horizonte",
+    "state": "MG"
+  },
+  {
+    "name": "Paraná Motors",
+    "partnerCode": "2305",
+    "status": "ativo",
+    "email": "suporte@paranamotors.com.br",
+    "document": "67.890.123/0001-65",
+    "address": "Rua XV de Novembro, 777",
+    "phone": "(41) 3777-9090",
+    "zipCode": "80020-310",
+    "city": "Curitiba",
+    "state": "PR"
+  },
+  {
+    "name": "Nordeste Veículos",
+    "partnerCode": "2306",
+    "status": "ativo",
+    "email": "contato@nordesteveiculos.com.br",
+    "document": "78.901.234/0001-76",
+    "address": "Avenida Beira Mar, 300",
+    "phone": "(85) 3666-1122",
+    "zipCode": "60165-121",
+    "city": "Fortaleza",
+    "state": "CE"
+  },
+  {
+    "name": "Bahia Car Premium",
+    "partnerCode": "2307",
+    "status": "ativo",
+    "email": "vendas@bahiacar.com.br",
+    "document": "89.012.345/0001-87",
+    "address": "Rua da Graça, 510",
+    "phone": "(71) 3888-4455",
+    "zipCode": "40150-055",
+    "city": "Salvador",
+    "state": "BA"
+  },
+  {
+    "name": "GoCar Automóveis",
+    "partnerCode": "2308",
+    "status": "ativo",
+    "email": "atendimento@gocar.com.br",
+    "document": "90.123.456/0001-98",
+    "address": "Avenida Goiás, 890",
+    "phone": "(62) 3999-7788",
+    "zipCode": "74010-010",
+    "city": "Goiânia",
+    "state": "GO"
+  },
+  {
+    "name": "Santa Catarina Imports",
+    "partnerCode": "2309",
+    "status": "ativo",
+    "email": "contato@scimports.com.br",
+    "document": "11.234.567/0001-09",
+    "address": "Rua das Flores, 145",
+    "phone": "(48) 3444-9090",
+    "zipCode": "88015-200",
+    "city": "Florianópolis",
+    "state": "SC"
+  }
+]

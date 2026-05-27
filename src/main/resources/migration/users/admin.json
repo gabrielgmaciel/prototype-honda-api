@@ -1,0 +1,10 @@
+[
+  {
+    "email": "admin@admin.com",
+    "name": "Admin Master",
+    "password": "$2a$10$Dejq/zzAnaJitHrUuus5xOnQm0qRtgg3tUV7Sqx8/qkVjf98JS3XC",
+    "roles": [
+      "admin"
+    ]
+  }
+]

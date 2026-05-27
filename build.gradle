@@ -39,6 +39,10 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
+    // Mongock
+    compileOnly 'io.mongock:mongock-springboot:5.5.1'
+    implementation 'io.mongock:mongodb-springdata-v4-driver:5.5.1'
+
     // Testing dependencies
     testImplementation 'org.springframework.boot:spring-boot-starter-data-mongodb-test'
     testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'

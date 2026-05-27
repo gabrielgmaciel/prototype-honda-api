@@ -15,4 +15,11 @@ public class RestConfig {
         restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(baseUrl));
         return restTemplate;
     }
+
+    @Bean
+    public RestTemplate restBusinessPartner(@Value("${api.business-partner}") String baseUrl) {
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory(baseUrl));
+        return restTemplate;
+    }
 }
