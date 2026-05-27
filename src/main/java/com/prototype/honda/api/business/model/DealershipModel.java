@@ -16,6 +16,7 @@ public class DealershipModel {
 
     @Id
     private String id;
+    private String imagem;
     private String partnerCode;
     private String name;
     private String email;

@@ -14,6 +14,8 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,10 +29,12 @@ public class BusinessService {
     private final BusinessClient businessClient;
     private final TaskExecutor taskExecutor;
 
+    private final ExecutorService executor =
+            Executors.newCachedThreadPool();
+
     public SseEmitter generateProposal(String userCode, String carId) {
 
         SseEmitter emitter = new SseEmitter(300000L);
-
         CompletableFuture.runAsync(() -> {
             try {
                 var proposals = getProposals(userCode, carId);
@@ -44,43 +48,40 @@ public class BusinessService {
                                         synchronized (emitter) {
                                             emitter.send(SseEmitter.event()
                                                     .name("proposal")
-                                                    .data(saved)
-                                            );
+                                                    .data(saved));
                                         }
                                     } catch (Exception e) {
                                         throw new RuntimeException(e);
                                     }
-
                                     return saved;
-
                                 }, taskExecutor)
                         )
                         .toList();
 
-                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+                CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+                        .join();
 
                 synchronized (emitter) {
                     emitter.send(SseEmitter.event()
                             .name("finished")
-                            .data("Processamento finalizado")
-                    );
+                            .data("Processamento finalizado"));
                 }
 
                 emitter.complete();
-
             } catch (Exception e) {
                 emitter.completeWithError(e);
             }
-
         }, taskExecutor);
 
         return emitter;
     }
 
     private Collection<ProposalModel> getProposals(String userCode, String carId) {
+
         var proposalCode = generateCodeService.generateProposalCode();
         var car = carsService.findById(carId);
         var user = userService.getUserById(userCode);
+
         return dealershipRepository.findAllByStatusActive()
                 .stream()
                 .map(partner -> ProposalModel.builder()
@@ -92,6 +93,7 @@ public class BusinessService {
                         .vehiclePrice(car.price())
                         .dealership(partner)
                         .build())
+                .map(proposalRepository::save)
                 .toList();
     }
 }

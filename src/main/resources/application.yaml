@@ -14,6 +14,10 @@ jwt:
   secret: 019e5565-6682-78e1-949d-dd6333836e77
   expiration: 86400000
 
+server:
+  compression:
+    enabled: false
+
 api:
   adress: https://cep.awesomeapi.com.br/json
   business-partner: http://localhost:8081

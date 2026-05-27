@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,9 +24,12 @@ public class BusinessController {
     private final BusinessService businessService;
 
     @PostMapping(value = "/new/proposal/{carId}", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public SseEmitter generateProposal(
+    public ResponseEntity<SseEmitter> generateProposal(
             @PathVariable String carId,
             @AuthenticationPrincipal UserPrincipal userPrincipal) {
-        return businessService.generateProposal(userPrincipal.getUser().getId(), carId);
+        return ResponseEntity.ok()
+                .header("Cache-Control", "no-cache")
+                .header("X-Accel-Buffering", "no")
+                .body(businessService.generateProposal(userPrincipal.getUser().getId(), carId));
     }
 }
