@@ -93,7 +93,7 @@ public class BusinessService {
                         .vehicleModelName(car.name())
                         .vehiclePrice(car.price())
                         .createdAt(LocalDateTime.now())
-                        .finishedAt(LocalDateTime.now().minusDays(7))
+                        .finishedAt(LocalDateTime.now().plusDays(7))
                         .dealership(partner)
                         .build())
                 .map(proposalRepository::save)
