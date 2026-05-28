@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Builder
 @Getter
@@ -23,6 +24,8 @@ public class ProposalModel {
     private String customerName;
     private String customerEmail;
     private String vehicleModelName;
+    private LocalDateTime createdAt;
+    private LocalDateTime finishedAt;
     private BigDecimal vehiclePrice;
     private DealershipModel dealership;
     private BusinessItem businessItem;

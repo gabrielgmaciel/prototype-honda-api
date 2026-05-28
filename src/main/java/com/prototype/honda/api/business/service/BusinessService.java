@@ -12,6 +12,7 @@ import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -91,6 +92,8 @@ public class BusinessService {
                         .customerEmail(user.getEmail())
                         .vehicleModelName(car.name())
                         .vehiclePrice(car.price())
+                        .createdAt(LocalDateTime.now())
+                        .finishedAt(LocalDateTime.now().minusDays(7))
                         .dealership(partner)
                         .build())
                 .map(proposalRepository::save)
