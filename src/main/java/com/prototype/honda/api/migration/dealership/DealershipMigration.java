@@ -15,7 +15,7 @@ public class DealershipMigration {
 
     @Execution
     public void migrate(DealershipRepository repository, JsonLoader jsonLoader) {
-        if (repository.findAll().isEmpty()){
+        if (repository.findAll().isEmpty()) {
             repository.saveAll(jsonLoader.loadJsonAsObject(PATH_MIGRATION, DealershipModel.class));
         }
     }

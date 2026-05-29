@@ -15,7 +15,7 @@ public class AdminMasterMigration {
 
     @Execution
     public void migrate(UserRepository repository, JsonLoader jsonLoader) {
-        if (repository.findAll().isEmpty()){
+        if (repository.findAll().isEmpty()) {
             repository.saveAll(jsonLoader.loadJsonAsObject(PATH_MIGRATION, User.class));
         }
     }
