@@ -3,7 +3,7 @@ spring:
     name: prototype-honda-api
 
   mongodb:
-    uri: mongodb://admin:senha123@mongo:27017/honda?authSource=admin
+    uri: mongodb://admin:senha123@localhost:27017/honda?authSource=admin
     auto-index-creation: true
 
 mongock:
@@ -20,4 +20,4 @@ server:
 
 api:
   adress: https://cep.awesomeapi.com.br/json
-  business-partner: http://prototype-honda-quotation-api:8081
+  business-partner: http://localhost:8081
