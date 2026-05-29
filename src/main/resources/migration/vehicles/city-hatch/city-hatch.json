@@ -1,0 +1,29 @@
+[
+  {
+    "name": "City Hatchback",
+    "description": "Escolha inteligente em todos sentidos",
+    "price": 136300,
+    "cover": "",
+    "banner": "",
+    "category": "Hatch",
+    "images": [],
+    "itens": [
+      {
+        "label": "City Hatchback Touring Sport",
+        "description": "Exclusivo e com o toque de esportividade. Teto com pintura preta, retrovisores com acabamento preto, pedaleira e ponteira de escapamento esportivo garantem muito mais estilo, ousadia e atitude esportiva."
+      },
+      {
+        "label": "Carregador sem fio para smartphones",
+        "description": "O carregador sem fio garante que seu smartphone nunca fique sem energia. Basta colocar o telefone na base de carregamento por indução para um carregamento sem o incômodo dos fios."
+      },
+      {
+        "label": "Lanternas traseiras em LED",
+        "description": "Esbanjando estilo e segurança, o City Hatchback conta com lanternas traseiras em LED, que proporcionam uma excelente iluminação para você rodar com mais tranquilidade."
+      },
+      {
+        "label": "Rodas em liga leve aro 16",
+        "description": "O City Hatchback possui rodas de liga leve de 16\" com um design exclusivo, proporcionando um visual mais arrojado e esportivo."
+      }
+    ]
+  }
+]

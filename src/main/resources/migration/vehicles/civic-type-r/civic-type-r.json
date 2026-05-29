@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Civic Type R",
+    "description": "DNA Esportivo Japonês",
+    "price": 350000,
+    "cover": "",
+    "banner": "",
+    "category": "Esportivo",
+    "images": [],
+    "itens": [
+      {
+        "label": "Conjunto óptico em LED",
+        "description": "O conjunto óptico moderno se destaca pelo design. Os faróis altos, baixos e luzes de rodagem diurna DRL garantem uma excelente iluminação."
+      },
+      {
+        "label": "Performance",
+        "description": "Motor 2.0 DI DOHC VTEC Turbo"
+      },
+      {
+        "label": "Tração dianteira",
+        "description": "O Civic Type R foi projetado para ser o carro com tração dianteira mais rápido do mundo."
+      },
+      {
+        "label": "Transmissão manual de 6 Marchas com tecnologia Rev-Match",
+        "description": "A Transmissão Manual de 6 Marchas possui o Sistema de Controle de Rev-Match da Honda, sincronizando automaticamente as rotações do motor para corresponder à marcha pretendida, garantindo a estabilidade do Civic Type R por meio de trocas de marcha suaves."
+      }
+    ]
+  }
+]

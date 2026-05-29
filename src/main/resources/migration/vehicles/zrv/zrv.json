@@ -1,0 +1,29 @@
+[
+  {
+    "name": "ZR-V",
+    "description": "Engenharia em forma de arte",
+    "price": 350000,
+    "cover": "",
+    "banner": "",
+    "category": "Suv",
+    "images": [],
+    "itens": [
+      {
+        "label": "Dirigibilidade e desempenho",
+        "description": "Uma experiência única de direção, o ZR-V traz o melhor dos dois mundos: SUV e Sedã. Trazendo uma mistura única que só um Test Drive te explica."
+      },
+      {
+        "label": "Combinação única",
+        "description": "Altura de SUV, estabilidade de sedã. Conheça uma experiência de condução excepcional, combinando elegância, conforto e estabilidade em um único veículo"
+      },
+      {
+        "label": "Floating Deck - Exclusivo console central elevado",
+        "description": "O console central elevado, além de oferecer um design moderno, tráz um toque adicional de sofistição que aumenta a sensação de se estar num cockpit. Com novo acabamento black piano, apoio de braço com revestimento em couro e compartimento com porta-objetos."
+      },
+      {
+        "label": "Conjunto óptico Full LED: Faróis e luzes de rodagem diurna",
+        "description": "O conjunto óptico Full LED (faróis alto, baixo, luzes diurnas DRL) destacam toda sofisticação e personalidade moderna do modelo, além de proporcionar maior iluminação e durabilidade."
+      }
+    ]
+  }
+]

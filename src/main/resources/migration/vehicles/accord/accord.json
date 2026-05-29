@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Accord",
+    "description": "Advanced Hybrid",
+    "price": 450000,
+    "cover": "",
+    "banner": "",
+    "category": "Advanced Hybrid",
+    "images": [],
+    "itens": [
+      {
+        "label": "Personalização do cockpit",
+        "description": "Personalize e salve os principais itens da cabine de acordo com a preferência de cada condutor. Posição do banco, configurações do ar-condicionado, conexões no multimídia e etc."
+      },
+      {
+        "label": "Novo design",
+        "description": "Um novo design, moderno e refinado com linhas marcantes. O Accord Advanced Hybrid traz sofisticação e modernidade em todos os seus detalhes."
+      },
+      {
+        "label": "HEV",
+        "description": "A motorização Híbrida promove uma experiência muito mais elétrica. A tecnologia oferece com maior atuação do motor elétrico, entregando um híbrido com essência de elétrico."
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+[
+  {
+    "name": "Civic Hybrido",
+    "description": "Advanced Hybrid",
+    "price": 200000,
+    "cover": "",
+    "banner": "",
+    "category": "Sedan",
+    "images": [],
+    "itens": [
+      {
+        "label": "Novo design",
+        "description": "Um novo design, esportivo, elegante e refinado com linhas marcantes. O Novo Civic Híbrido traz sofisticação e modernidade em todos os seus detalhes."
+      },
+      {
+        "label": "Multimídia com Google Assistente Integrado",
+        "description": "Agora com Google Assistente Integrado ao seu multimídia você pode aproveitar a conveniência dos aplicativos e serviços Google no conforto do seu Civic. Com o Google Assistente Integrado, você tem mais praticidade e conforto no dia a dia. Usando apenas o comando de voz, ajuste a temperatura do ar condicionado, defina rotas, acione seus aplicativos favoritos e faça suas ligações sem tirar as mãos do volante. Uma experiência de direção mais confortável e inteligente."
+      },
+      {
+        "label": "HEV",
+        "description": "A Tecnologia Híbrida promove uma experiência muito mais elétrica e sustentável. Motorização com maior atuação do modo elétrico, entregando um sistema híbrido que alia baixo consumo de combustível com muita potência."
+      }
+    ]
+  }
+]

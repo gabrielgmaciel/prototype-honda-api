@@ -1,0 +1,25 @@
+[
+  {
+    "name": "WR-V",
+    "description": "Incrível do começo ao fim de semana",
+    "price": 300000,
+    "cover": "",
+    "banner": "",
+    "category": "Suv",
+    "images": [],
+    "itens": [
+      {
+        "label": "Design Robusto",
+        "description": "Icônico e robusto, o WR-V mostra sua presença marcante em qualquer hora e lugar. Do início ao fim de semana."
+      },
+      {
+        "label": "6 Anos de garantia Honda",
+        "description": "Conforto é ficar livre de preocupações. O novo WR-V possui 6 anos de garantia total de fábrica."
+      },
+      {
+        "label": "Informação, segurança e controle na palma da mão",
+        "description": "No aplicativo, você executa controles remotos e obtém informações do veículo."
+      }
+    ]
+  }
+]
